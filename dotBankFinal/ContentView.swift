@@ -91,6 +91,7 @@ extension String {
 
 // MARK: - STRUCTURES
 
+// MARK: Account Struct
 struct Account: Identifiable {
     var id: Int { number }
 
@@ -99,7 +100,7 @@ struct Account: Identifiable {
     var money: Double
 }
 
-// MARK: - Structure Card
+// MARK: Card Struct
 struct Card: Identifiable {
     var id: Int { number }
 

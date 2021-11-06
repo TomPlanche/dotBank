@@ -12,6 +12,8 @@
 		E44546A52735EB530026830C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E44546A42735EB530026830C /* Assets.xcassets */; };
 		E44546A82735EB530026830C /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E44546A72735EB530026830C /* Preview Assets.xcassets */; };
 		E44546AF2735ED890026830C /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E44546AE2735ED890026830C /* HomeView.swift */; };
+		E4C31FD72736239D00AC17E2 /* ScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4C31FD62736239D00AC17E2 /* ScrollView.swift */; };
+		E4C31FD92736240A00AC17E2 /* FormView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4C31FD82736240A00AC17E2 /* FormView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -21,6 +23,8 @@
 		E44546A42735EB530026830C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		E44546A72735EB530026830C /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		E44546AE2735ED890026830C /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
+		E4C31FD62736239D00AC17E2 /* ScrollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScrollView.swift; sourceTree = "<group>"; };
+		E4C31FD82736240A00AC17E2 /* FormView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -55,7 +59,7 @@
 			children = (
 				E44546A02735EB510026830C /* dotBankFinalApp.swift */,
 				E44546A22735EB510026830C /* ContentView.swift */,
-				E44546AE2735ED890026830C /* HomeView.swift */,
+				E4C31FD42736234A00AC17E2 /* Home */,
 				E44546A42735EB530026830C /* Assets.xcassets */,
 				E44546A62735EB530026830C /* Preview Content */,
 			);
@@ -68,6 +72,24 @@
 				E44546A72735EB530026830C /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		E4C31FD42736234A00AC17E2 /* Home */ = {
+			isa = PBXGroup;
+			children = (
+				E44546AE2735ED890026830C /* HomeView.swift */,
+				E4C31FD52736236000AC17E2 /* InScrollView */,
+			);
+			path = Home;
+			sourceTree = "<group>";
+		};
+		E4C31FD52736236000AC17E2 /* InScrollView */ = {
+			isa = PBXGroup;
+			children = (
+				E4C31FD62736239D00AC17E2 /* ScrollView.swift */,
+				E4C31FD82736240A00AC17E2 /* FormView.swift */,
+			);
+			path = InScrollView;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -141,6 +163,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				E44546AF2735ED890026830C /* HomeView.swift in Sources */,
+				E4C31FD72736239D00AC17E2 /* ScrollView.swift in Sources */,
+				E4C31FD92736240A00AC17E2 /* FormView.swift in Sources */,
 				E44546A32735EB510026830C /* ContentView.swift in Sources */,
 				E44546A12735EB510026830C /* dotBankFinalApp.swift in Sources */,
 			);
