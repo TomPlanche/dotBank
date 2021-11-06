@@ -17,6 +17,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		E442D6FD27362A8800BC0207 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		E445469D2735EB510026830C /* dotBankFinal.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = dotBankFinal.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E44546A02735EB510026830C /* dotBankFinalApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dotBankFinalApp.swift; sourceTree = "<group>"; };
 		E44546A22735EB510026830C /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -41,6 +42,7 @@
 		E44546942735EB510026830C = {
 			isa = PBXGroup;
 			children = (
+				E442D6FD27362A8800BC0207 /* README.md */,
 				E445469F2735EB510026830C /* dotBankFinal */,
 				E445469E2735EB510026830C /* Products */,
 			);
