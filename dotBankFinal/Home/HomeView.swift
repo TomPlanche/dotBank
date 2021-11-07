@@ -20,8 +20,7 @@ struct HomeView: View {
     let card2 = Card(number: 7413686531874906, name: "Cash Reward Visa", money: 1576.03)
 
     var body: some View {
-        NavigationView {
-            ZStack {
+        ZStack {
                 Color("background")
                     .ignoresSafeArea()
                 VStack {
@@ -80,7 +79,6 @@ struct HomeView: View {
                     Spacer()
                 }
             }
-        }
     }
 }
 

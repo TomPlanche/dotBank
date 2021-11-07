@@ -15,68 +15,90 @@ struct FormView: View {
 
     @State var areYouGoingToSecondView: Bool = false
 
+    /*
+     .navigationBarTitle("SwiftUI Tutorials")
+     .navigationBarItems(trailing:
+     Button(action: {
+     self.showSheetView.toggle()
+     }) {
+     Image(systemName: "bell.circle.fill")
+     .font(Font.system(.title))
+     }
+     )
+     }.sheet(isPresented: $showSheetView) {
+     SheetView(showSheetView: self.$showSheetView)
+     }
+     */
+
+    @State var showSheetView = false
+
     var body: some View {
-        VStack {
-            // MARK: - Form
-            Form {
-                // MARK: - Section Accounts
-                Section(
-                    header:
-                        Text("CHECKING ACCOUNTS (\(Accounts.count))")
-                        .foregroundColor(Color("grayText"))
-                ) {
-                    ForEach(Accounts) { account in
-                        Button(action: {
-                            print("Bouton \(account.name)")
-                        }, label: {
+        NavigationView {
+            VStack {
+                // MARK: - Form
+                Form {
+                    // MARK: - Section Accounts
+                    Section(
+                        header:
+                            Text("CHECKING ACCOUNTS (\(Accounts.count))")
+                            .foregroundColor(Color("grayText"))
+                    ) {
+                        ForEach(Accounts) { account in
+                            Button(action: {
+                                print("Bouton \(account.name)")
+                            }, label: {
+                                    HStack {
+                                        VStack(alignment: .leading) {
+                                            Text("".cleanDollars(account.money))
+                                                .bold()
+                                                .font(.system(size: 19))
+                                            Text("\(account.name) ...\(String(account.number).substring(from: -4))")
+                                                .font(.system(size: 15))
+                                                .foregroundColor(Color("grayText"))
+                                        }
+                                        Spacer()
+                                        Image(systemName: "chevron.right")
+                                            .foregroundColor(Color("grayText"))
+                                    }
+                                })
+                                .foregroundColor(.white)
+
+                        } .listRowBackground(Color.hexToColor(hex: "#2C2C2E"))
+                            .padding(5)
+                    }
+                    // MARK: - Section Cards
+                    Section(
+                        header:
+                            Text("CREDIT CARDS (\(Cards.count))")
+                            .foregroundColor(Color("grayText"))
+                    ) {
+                        ForEach(Cards) { card in
+                            Button(action: {
+                                self.showSheetView.toggle()
+                            }, label: {
                                 HStack {
                                     VStack(alignment: .leading) {
-                                        Text("".cleanDollars(account.money))
+                                        Text("".cleanDollars(card.money))
                                             .bold()
                                             .font(.system(size: 19))
-                                        Text("\(account.name) ...\(String(account.number).substring(from: -4))")
+                                        Text("\(card.name) ...\(String(card.number).substring(from: -4))")
                                             .font(.system(size: 15))
                                             .foregroundColor(Color("grayText"))
                                     }
-                                    Spacer()
-                                    Image(systemName: "chevron.right")
-                                        .foregroundColor(Color("grayText"))
+                                }.sheet(isPresented: $showSheetView) {
+                                    CardView(card: card, showSheetView: self.$showSheetView)
                                 }
                             })
-                            .foregroundColor(.white)
 
-                    } .listRowBackground(Color.hexToColor(hex: "#2C2C2E"))
-                        .padding(5)
-                }
-                // MARK: - Section Cards
-
-                Section(
-                    header:
-                        Text("CREDIT CARDS (\(Cards.count))")
-                        .foregroundColor(Color("grayText"))
-                ) {
-                    ForEach(Cards) { card in
-                        NavigationLink(destination: CardView(card: card)) {
-                            HStack {
-                                VStack(alignment: .leading) {
-                                    Text("".cleanDollars(card.money))
-                                        .bold()
-                                        .font(.system(size: 19))
-                                    Text("\(card.name) ...\(String(card.number).substring(from: -4))")
-                                        .font(.system(size: 15))
-                                        .foregroundColor(Color("grayText"))
-                                }
-                            }
                         }
-
+                            .listRowBackground(Color.hexToColor(hex: "#2C2C2E"))
+                            .padding(5)
                     }
-                        .listRowBackground(Color.hexToColor(hex: "#2C2C2E"))
-                        .padding(5)
                 }
             }
-        }
-        .onAppear {
-            UITableView.appearance().backgroundColor = UIColor(Color("background"))
+                .onAppear {
+                UITableView.appearance().backgroundColor = UIColor(Color("background"))
+            }
         }
     }
 }
