@@ -28,8 +28,8 @@ struct ButtonView: View {
                                 .foregroundColor(Color("blueText"))
                         }
                     }
-                    .font(.system(size: 20, weight: .semibold, design: .rounded))
-                    .foregroundColor(.white)
+                        .font(.system(size: 20, weight: .semibold, design: .rounded))
+                        .foregroundColor(.white)
                     Text(content)
                         .font(.system(size: 15, weight: .semibold, design: .rounded))
                 }.padding()
@@ -38,8 +38,8 @@ struct ButtonView: View {
                     .font(.system(size: 25))
                     .padding(.trailing)
             }
-            .foregroundColor(Color("grayText"))
-            
+                .foregroundColor(Color("grayText"))
+
         }.frame(width: UIScreen.main.bounds.width / 1.1, height: UIScreen.main.bounds.height / 12)
     }
 }
