@@ -13,9 +13,13 @@ struct FormView: View {
     @State var Accounts: Array<Account>
     @State var Cards: Array<Card>
 
+    @State var areYouGoingToSecondView: Bool = false
+
     var body: some View {
         VStack {
+            // MARK: - Form
             Form {
+                // MARK: - Section Accounts
                 Section(
                     header:
                         Text("CHECKING ACCOUNTS (\(Accounts.count))")
@@ -27,7 +31,7 @@ struct FormView: View {
                         }, label: {
                                 HStack {
                                     VStack(alignment: .leading) {
-                                        Text("".cleanDollars(String(account.money)))
+                                        Text("".cleanDollars(account.money))
                                             .bold()
                                             .font(.system(size: 19))
                                         Text("\(account.name) ...\(String(account.number).substring(from: -4))")
@@ -44,36 +48,35 @@ struct FormView: View {
                     } .listRowBackground(Color.hexToColor(hex: "#2C2C2E"))
                         .padding(5)
                 }
+                // MARK: - Section Cards
+
                 Section(
                     header:
                         Text("CREDIT CARDS (\(Cards.count))")
                         .foregroundColor(Color("grayText"))
                 ) {
                     ForEach(Cards) { card in
-                        Button(action: {
-                            print("Bouton \(card.name)")
-                        }, label: {
-                                HStack {
-                                    VStack(alignment: .leading) {
-                                        Text("".cleanDollars(String(card.money)))
-                                            .bold()
-                                            .font(.system(size: 19))
-                                        Text("\(card.name) ...\(String(card.number).substring(from: -4))")
-                                            .font(.system(size: 15))
-                                            .foregroundColor(Color("grayText"))
-                                    }
-                                    Spacer()
-                                    Image(systemName: "chevron.right")
+                        NavigationLink(destination: CardView(card: card)) {
+                            HStack {
+                                VStack(alignment: .leading) {
+                                    Text("".cleanDollars(card.money))
+                                        .bold()
+                                        .font(.system(size: 19))
+                                    Text("\(card.name) ...\(String(card.number).substring(from: -4))")
+                                        .font(.system(size: 15))
                                         .foregroundColor(Color("grayText"))
                                 }
-                            })
-                            .foregroundColor(.white)
+                            }
+                        }
 
                     }
                         .listRowBackground(Color.hexToColor(hex: "#2C2C2E"))
                         .padding(5)
                 }
             }
+        }
+        .onAppear {
+            UITableView.appearance().backgroundColor = UIColor(Color("background"))
         }
     }
 }

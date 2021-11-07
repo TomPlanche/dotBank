@@ -17,6 +17,27 @@ struct ContentView: View {
                     Text("Accounts")
                 }
             }
+            Text("arrow.left.arrow.right")
+                .tabItem {
+                    VStack {
+                        Image(systemName: "arrow.left.arrow.right")
+                        Text("Tranfer & Pay")
+                    }
+                }
+            Text("square.and.arrow.down")
+                .tabItem {
+                    VStack {
+                        Image(systemName: "square.and.arrow.down")
+                        Text("Deposit Check")
+                    }
+                }
+            Text("line.horizontal.3")
+                .tabItem {
+                    VStack {
+                        Image(systemName: "line.horizontal.3")
+                        Text("Menu")
+                    }
+                }
         }
     }
 }
@@ -55,13 +76,13 @@ extension Color {
 
 // MARK: String Extention
 extension String {
-    func cleanDollars(_ value: String?) -> String {
+    func cleanDollars(_ value: Double?) -> String {
         guard value != nil else { return "$0.00" }
-        let doubleValue = Double(value!) ?? 0.0
+        let doubleValue = value!
         let formatter = NumberFormatter()
         formatter.currencyCode = "USD"
         formatter.currencySymbol = "$"
-        formatter.minimumFractionDigits = (value!.contains(".00")) ? 0 : 2
+        formatter.minimumFractionDigits = (String("\(value)").contains(".00")) ? 0 : 2
         formatter.maximumFractionDigits = 2
         formatter.numberStyle = .currencyAccounting
 
