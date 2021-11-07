@@ -39,6 +39,22 @@ struct HomeView: View {
                             .font(.system(size: 40, weight: .semibold, design: .rounded))
                         Spacer()
                     }.padding(.leading)
+
+                    FormView(Accounts: [account1, account2], Cards: [card1, card2])
+                        .onAppear {
+                            UITableView.appearance().backgroundColor = UIColor(Color("background"))
+                        }
+                        .frame(height: UIScreen.main.bounds.height / 2.65)
+
+                    ZStack {
+                        RoundedRectangle(cornerRadius: 15)
+                            .stroke(lineWidth: 2)
+                        Text("Open A New Account")
+                            .font(.system(size: 20, weight: .semibold, design: .rounded))
+                    }
+                    .foregroundColor(Color("blueText"))
+                    .frame(width: UIScreen.main.bounds.width / 1.1, height: UIScreen.main.bounds.height / 18)
+
                 }
                 Spacer()
             }
