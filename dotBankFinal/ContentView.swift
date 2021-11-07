@@ -107,4 +107,5 @@ struct Card: Identifiable {
     var number: Int
     var name: String
     var money: Double
+    var threshold: Int = 5000
 }

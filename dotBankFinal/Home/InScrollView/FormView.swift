@@ -41,7 +41,8 @@ struct FormView: View {
                         })
                             .foregroundColor(.white)
 
-                    }.listRowBackground(Color.hexToColor(hex: "#2C2C2E"))
+                    }   .listRowBackground(Color.hexToColor(hex: "#2C2C2E"))
+                        .padding(5)
                 }
                 Section(
                     header:
@@ -68,7 +69,9 @@ struct FormView: View {
                         })
                             .foregroundColor(.white)
 
-                    }.listRowBackground(Color.hexToColor(hex: "#2C2C2E"))
+                    }
+                    .listRowBackground(Color.hexToColor(hex: "#2C2C2E"))
+                    .padding(5)
                 }
             }
         }

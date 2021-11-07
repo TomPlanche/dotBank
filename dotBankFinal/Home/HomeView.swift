@@ -25,6 +25,9 @@ struct HomeView: View {
                 .ignoresSafeArea()
             VStack {
                 VStack {
+
+                    // MARK: - TOP NON SCROLLABLE
+                    // MARK: Icones au Top
                     HStack {
                         Image(systemName: "text.bubble")
                         Spacer()
@@ -33,27 +36,47 @@ struct HomeView: View {
                         .font(.system(size: 25))
                         .foregroundColor(Color("blueText"))
                         .padding()
-
+                    // MARK: Titre Account
                     HStack {
                         Text("Accounts")
                             .font(.system(size: 40, weight: .semibold, design: .rounded))
                         Spacer()
                     }.padding(.leading)
 
-                    FormView(Accounts: [account1, account2], Cards: [card1, card2])
-                        .onAppear {
-                            UITableView.appearance().backgroundColor = UIColor(Color("background"))
+                    // MARK: - DÉBUT SCROLLABLE
+                    ScrollView(.vertical, showsIndicators: false) {
+                        // MARK: Scroll obligé car mutiplicité des comptes/cartes
+                        ScrollView(.vertical, showsIndicators: false) {
+                            FormView(Accounts: [account1, account2], Cards: [card1, card2])
+                                .onAppear {
+                                UITableView.appearance().backgroundColor = UIColor(Color("background"))
+                            }
+                                .frame(height: UIScreen.main.bounds.height / 2.5)
                         }
-                        .frame(height: UIScreen.main.bounds.height / 2.65)
-
-                    ZStack {
-                        RoundedRectangle(cornerRadius: 15)
-                            .stroke(lineWidth: 2)
-                        Text("Open A New Account")
-                            .font(.system(size: 20, weight: .semibold, design: .rounded))
+                            .frame(height: UIScreen.main.bounds.height / 2.5)
+                        // MARK: Bouton New Account
+                        ZStack {
+                            RoundedRectangle(cornerRadius: 15)
+                                .stroke(lineWidth: 2)
+                            Text("Open A New Account")
+                                .font(.system(size: 20, weight: .semibold, design: .rounded))
+                        }
+                            .foregroundColor(Color("blueText"))
+                            .frame(width: UIScreen.main.bounds.width / 1.1, height: UIScreen.main.bounds.height / 18)
+                            .padding(.vertical)
+                        // MARK: Bouton Schedule a meeting
+                        ButtonView(
+                            title: "Schedule A Meeting",
+                            content: "Connect with a specialist"
+                        )
+                            .padding()
+                        // MARK: Bouton Dot Bank Offers
+                        ButtonView(
+                            title: "Dot Bank Offers",
+                            content: "Add Deals Shop(s) and get cashback",
+                            flags: 17
+                        )
                     }
-                    .foregroundColor(Color("blueText"))
-                    .frame(width: UIScreen.main.bounds.width / 1.1, height: UIScreen.main.bounds.height / 18)
 
                 }
                 Spacer()
