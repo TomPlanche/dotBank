@@ -19,25 +19,25 @@ struct ContentView: View {
             }
             Text("arrow.left.arrow.right")
                 .tabItem {
-                    VStack {
-                        Image(systemName: "arrow.left.arrow.right")
-                        Text("Tranfer & Pay")
-                    }
+                VStack {
+                    Image(systemName: "arrow.left.arrow.right")
+                    Text("Tranfer & Pay")
                 }
+            }
             Text("square.and.arrow.down")
                 .tabItem {
-                    VStack {
-                        Image(systemName: "square.and.arrow.down")
-                        Text("Deposit Check")
-                    }
+                VStack {
+                    Image(systemName: "square.and.arrow.down")
+                    Text("Deposit Check")
                 }
+            }
             Text("line.horizontal.3")
                 .tabItem {
-                    VStack {
-                        Image(systemName: "line.horizontal.3")
-                        Text("Menu")
-                    }
+                VStack {
+                    Image(systemName: "line.horizontal.3")
+                    Text("Menu")
                 }
+            }
         }
     }
 }
@@ -110,6 +110,25 @@ extension String {
     }
 }
 
+extension Date {
+        /// Create a date from specified parameters
+        ///
+        /// - Parameters:
+        ///   - year: The desired year
+        ///   - month: The desired month
+        ///   - day: The desired day
+        /// - Returns: A `Date` object
+    static func from(year: Int, month: Int, day: Int) -> Date? {
+        let calendar = Calendar(identifier: .gregorian)
+        var dateComponents = DateComponents()
+        dateComponents.year = year
+        dateComponents.month = month
+        dateComponents.day = day
+        return calendar.date(from: dateComponents) ?? nil
+    }
+}
+
+
 // MARK: - STRUCTURES
 
 // MARK: Account Struct
@@ -129,4 +148,14 @@ struct Card: Identifiable {
     var name: String
     var money: Double
     var threshold: Int = 5000
+}
+
+// MARK: Transaction
+struct Transaction: Identifiable {
+    var id: Int { number }
+
+    var number: Int
+    var amount: Double
+    var name: String
+    var date: Date
 }

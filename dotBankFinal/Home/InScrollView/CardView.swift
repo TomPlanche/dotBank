@@ -18,6 +18,42 @@ struct CardView: View {
         ["Next Closing Date", "Mar 13, 2021"]
     ]
 
+
+    let transactions: [Transaction] = [
+        Transaction(
+            number: 233,
+            amount: 487.89,
+            name: "Pending Payment",
+            date: Date.from(year: 2021, month: 11, day: 2)!
+        ),
+        Transaction(
+            number: 234,
+            amount: 142.34,
+            name: "COSTCO WHSE #0420 Oxnard CA",
+            date: Date.from(year: 2021, month: 11, day: 4)!
+        ),
+        Transaction(
+            number: 235,
+            amount: 42.34,
+            name: "AT&T Bill Payment214-721-3651 TX",
+            date: Date.from(year: 2021, month: 11, day: 5)!
+        ),
+        Transaction(
+            number: 236,
+            amount: 500,
+            name: "CASH DEPOSIT",
+            date: Date.from(year: 2021, month: 11, day: 6)!
+        )
+    ]
+
+    func date2string(date: Date) -> String {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "dd/MM/YY"
+
+        return dateFormatter.string(from: date)
+    }
+
+
     // MARK: - BODY
     var body: some View {
         ZStack {
@@ -61,7 +97,7 @@ struct CardView: View {
                 // MARK: Form
                 Form {
                     Section(content: {
-                        ForEach(0...textes.count - 1, id: \.self) {i in
+                        ForEach(0...textes.count - 1, id: \.self) { i in
                             HStack {
                                 Text(textes[i][0])
                                     .font(.system(size: 17))
@@ -69,8 +105,8 @@ struct CardView: View {
                                 Text(textes[i][1])
                                     .bold()
                             }
-                            .font(.system(size: 18))
-                            .foregroundColor(.white)
+                                .font(.system(size: 18))
+                                .foregroundColor(.white)
                         }
                         HStack {
                             Text("Make Payment")
@@ -80,11 +116,39 @@ struct CardView: View {
                             Image(systemName: "chevron.right")
                                 .foregroundColor(Color(UIColor.systemGray))
                         }
-                        .font(.system(size: 20))
+                            .font(.system(size: 20))
                     }, header: {
                             Text("PAYMENT INFO")
                                 .foregroundColor(Color("grayText"))
                                 .font(.system(size: 18))
+                        })
+                        .listRowBackground(Color.hexToColor(hex: "#2C2C2E"))
+                    Section(content: {
+                        ForEach(0...3, id: \.self) { i in
+                            HStack {
+                                VStack(alignment: .leading) {
+                                    Text(transactions[i].name)
+                                        .font(.system(size: 17, weight: .regular, design: .rounded))
+                                    Text(date2string(date: transactions[i].date))
+                                        .foregroundColor(Color("grayText"))
+                                }
+                                Spacer()
+                                Text("".cleanDollars(transactions[i].amount))
+
+                            }
+                                .foregroundColor(.white)
+                        }
+                        HStack {
+                            Text("All Transactions")
+                                .bold()
+                                .foregroundColor(Color("blueText"))
+                            Spacer()
+                            Image(systemName: "chevron.right")
+                                .foregroundColor(Color(UIColor.systemGray))
+                        }
+                        .font(.system(size: 20))
+                    }, header: {
+
                         })
                         .listRowBackground(Color.hexToColor(hex: "#2C2C2E"))
                 }
