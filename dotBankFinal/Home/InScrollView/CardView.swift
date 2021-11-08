@@ -58,113 +58,111 @@ struct CardView: View {
 
     // MARK: - BODY
     var body: some View {
-        NavigationView {
-            ZStack {
-                // MARK: Background
-                Color("background")
-                    .ignoresSafeArea()
-                // MARK: General VStack
-                VStack {
-                    HStack {
-                        Text("\(card.name) ...\(String(card.number).substring(from: -4))")
-                        Spacer()
-                        Button(action: {
-                            self.showSheetView = false
-                        }, label: {
-                                Image(systemName: "bell")
-                            })
-                    }
-                        .font(.system(size: 20, weight: .semibold, design: .rounded))
-                        .foregroundColor(Color("blueText"))
-
-                    Text("".cleanDollars(card.money))
-                        .font(.system(size: 45, weight: .semibold, design: .rounded))
-                        .foregroundColor(.white)
-                        .padding([.top, .trailing, .leading])
-
-                    HStack {
-                        Text("Current Balance")
-                            .foregroundColor(Color("grayText"))
-                        Image(systemName: "info.circle")
-                            .font(.system(size: 25))
-                            .foregroundColor(Color("blueText"))
-                    }
-
-                    // MARK: ProgressBar
-                    ProgressBar(
-                        value: Float((card.money / Double(card.threshold))),
-                        color: (Int(card.money) < card.threshold) ? Color(UIColor.systemBlue) : Color(UIColor.systemRed)
-                    )
-                        .frame(width: UIScreen.main.bounds.width / 1.1, height: UIScreen.main.bounds.height / 150)
-                        .padding()
-
-                    Text("Avaliable Credit: \("".cleanDollars(Double(card.threshold) - card.money)) ")
-                        .foregroundColor(Color("grayText"))
-
-                    // MARK: Form
-                    Form {
-                        Section(content: {
-                            ForEach(0...textes.count - 1, id: \.self) { i in
-                                HStack {
-                                    Text(textes[i][0])
-                                        .font(.system(size: 17))
-                                    Spacer()
-                                    Text(textes[i][1])
-                                        .bold()
-                                }
-                                    .font(.system(size: 18))
-                                    .foregroundColor(.white)
-                            }
-                            HStack {
-                                Text("Make Payment")
-                                    .bold()
-                                    .foregroundColor(Color("blueText"))
-                                Spacer()
-                                Image(systemName: "chevron.right")
-                                    .foregroundColor(Color(UIColor.systemGray))
-                            }
-                                .font(.system(size: 20))
-                        }, header: {
-                                Text("PAYMENT INFO")
-                                    .foregroundColor(Color("grayText"))
-                                    .font(.system(size: 18))
-                            })
-                            .listRowBackground(Color.hexToColor(hex: "#2C2C2E"))
-                        Section(content: {
-                            ForEach(0...3, id: \.self) { i in
-                                HStack {
-                                    VStack(alignment: .leading) {
-                                        Text(transactions[i].name)
-                                            .font(.system(size: 17, weight: .regular, design: .rounded))
-                                        Text(date2string(date: transactions[i].date))
-                                            .foregroundColor(Color("grayText"))
-                                    }
-                                    Spacer()
-                                    Text("".cleanDollars(transactions[i].amount))
-
-                                }
-                                    .foregroundColor(.white)
-                            }
-                            HStack {
-                                Text("All Transactions")
-                                    .bold()
-                                    .foregroundColor(Color("blueText"))
-                                Spacer()
-                                Image(systemName: "chevron.right")
-                                    .foregroundColor(Color(UIColor.systemGray))
-                            }
-                                .font(.system(size: 20))
-                        }, header: {
-
-                            })
-                            .listRowBackground(Color.hexToColor(hex: "#2C2C2E"))
-                    }
-                        .onAppear {
-                        UITableView.appearance().backgroundColor = UIColor(Color("background"))
-                    }
-
+        ZStack {
+            // MARK: Background
+            Color("background")
+                .ignoresSafeArea()
+            // MARK: General VStack
+            VStack {
+                HStack {
+                    Text("\(card.name) ...\(String(card.number).substring(from: -4))")
                     Spacer()
+                    Button(action: {
+                        self.showSheetView = false
+                    }, label: {
+                            Image(systemName: "bell")
+                        })
                 }
+                    .font(.system(size: 20, weight: .semibold, design: .rounded))
+                    .foregroundColor(Color("blueText"))
+
+                Text("".cleanDollars(card.money))
+                    .font(.system(size: 45, weight: .semibold, design: .rounded))
+                    .foregroundColor(.white)
+                    .padding([.top, .trailing, .leading])
+
+                HStack {
+                    Text("Current Balance")
+                        .foregroundColor(Color("grayText"))
+                    Image(systemName: "info.circle")
+                        .font(.system(size: 25))
+                        .foregroundColor(Color("blueText"))
+                }
+
+                // MARK: ProgressBar
+                ProgressBar(
+                    value: Float((card.money / Double(card.threshold))),
+                    color: (Int(card.money) < card.threshold) ? Color(UIColor.systemBlue) : Color(UIColor.systemRed)
+                )
+                    .frame(width: UIScreen.main.bounds.width / 1.1, height: UIScreen.main.bounds.height / 150)
+                    .padding()
+
+                Text("Avaliable Credit: \("".cleanDollars(Double(card.threshold) - card.money)) ")
+                    .foregroundColor(Color("grayText"))
+
+                // MARK: Form
+                Form {
+                    Section(content: {
+                        ForEach(0...textes.count - 1, id: \.self) { i in
+                            HStack {
+                                Text(textes[i][0])
+                                    .font(.system(size: 17))
+                                Spacer()
+                                Text(textes[i][1])
+                                    .bold()
+                            }
+                                .font(.system(size: 18))
+                                .foregroundColor(.white)
+                        }
+                        HStack {
+                            Text("Make Payment")
+                                .bold()
+                                .foregroundColor(Color("blueText"))
+                            Spacer()
+                            Image(systemName: "chevron.right")
+                                .foregroundColor(Color(UIColor.systemGray))
+                        }
+                            .font(.system(size: 20))
+                    }, header: {
+                            Text("PAYMENT INFO")
+                                .foregroundColor(Color("grayText"))
+                                .font(.system(size: 18))
+                        })
+                        .listRowBackground(Color.hexToColor(hex: "#2C2C2E"))
+                    Section(content: {
+                        ForEach(0...3, id: \.self) { i in
+                            HStack {
+                                VStack(alignment: .leading) {
+                                    Text(transactions[i].name)
+                                        .font(.system(size: 17, weight: .regular, design: .rounded))
+                                    Text(date2string(date: transactions[i].date))
+                                        .foregroundColor(Color("grayText"))
+                                }
+                                Spacer()
+                                Text("".cleanDollars(transactions[i].amount))
+
+                            }
+                                .foregroundColor(.white)
+                        }
+                        HStack {
+                            Text("All Transactions")
+                                .bold()
+                                .foregroundColor(Color("blueText"))
+                            Spacer()
+                            Image(systemName: "chevron.right")
+                                .foregroundColor(Color(UIColor.systemGray))
+                        }
+                            .font(.system(size: 20))
+                    }, header: {
+
+                        })
+                        .listRowBackground(Color.hexToColor(hex: "#2C2C2E"))
+                }
+                    .onAppear {
+                    UITableView.appearance().backgroundColor = UIColor(Color("background"))
+                }
+
+                Spacer()
             }
         }
     }

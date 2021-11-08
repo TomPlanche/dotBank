@@ -33,49 +33,49 @@ struct FormView: View {
     @State var showSheetView = false
 
     var body: some View {
-        NavigationView {
-            VStack {
-                // MARK: - Form
-                Form {
-                    // MARK: - Section Accounts
-                    Section(
-                        header:
-                            Text("CHECKING ACCOUNTS (\(Accounts.count))")
-                            .foregroundColor(Color("grayText"))
-                    ) {
-                        ForEach(Accounts) { account in
-                            Button(action: {
-                                print("Bouton \(account.name)")
-                            }, label: {
-                                    HStack {
-                                        VStack(alignment: .leading) {
-                                            Text("".cleanDollars(account.money))
-                                                .bold()
-                                                .font(.system(size: 19))
-                                            Text("\(account.name) ...\(String(account.number).substring(from: -4))")
-                                                .font(.system(size: 15))
-                                                .foregroundColor(Color("grayText"))
-                                        }
-                                        Spacer()
-                                        Image(systemName: "chevron.right")
+
+        VStack {
+            // MARK: - Form
+            Form {
+                // MARK: - Section Accounts
+                Section(
+                    header:
+                        Text("CHECKING ACCOUNTS (\(Accounts.count))")
+                        .foregroundColor(Color("grayText"))
+                ) {
+                    ForEach(Accounts) { account in
+                        Button(action: {
+                            print("Bouton \(account.name)")
+                        }, label: {
+                                HStack {
+                                    VStack(alignment: .leading) {
+                                        Text("".cleanDollars(account.money))
+                                            .bold()
+                                            .font(.system(size: 19))
+                                        Text("\(account.name) ...\(String(account.number).substring(from: -4))")
+                                            .font(.system(size: 15))
                                             .foregroundColor(Color("grayText"))
                                     }
-                                })
-                                .foregroundColor(.white)
+                                    Spacer()
+                                    Image(systemName: "chevron.right")
+                                        .foregroundColor(Color("grayText"))
+                                }
+                            })
+                            .foregroundColor(.white)
 
-                        } .listRowBackground(Color.hexToColor(hex: "#2C2C2E"))
-                            .padding(5)
-                    }
-                    // MARK: - Section Cards
-                    Section(
-                        header:
-                            Text("CREDIT CARDS (\(Cards.count))")
-                            .foregroundColor(Color("grayText"))
-                    ) {
-                        ForEach(Cards) { card in
-                            Button(action: {
-                                self.showSheetView.toggle()
-                            }, label: {
+                    } .listRowBackground(Color.hexToColor(hex: "#2C2C2E"))
+                        .padding(5)
+                }
+                // MARK: - Section Cards
+                Section(
+                    header:
+                        Text("CREDIT CARDS (\(Cards.count))")
+                        .foregroundColor(Color("grayText"))
+                ) {
+                    ForEach(Cards) { card in
+                        Button(action: {
+                            self.showSheetView.toggle()
+                        }, label: {
                                 HStack {
                                     VStack(alignment: .leading) {
                                         Text("".cleanDollars(card.money))
@@ -90,16 +90,16 @@ struct FormView: View {
                                 }
                             })
 
-                        }
-                            .listRowBackground(Color.hexToColor(hex: "#2C2C2E"))
-                            .padding(5)
                     }
+                        .listRowBackground(Color.hexToColor(hex: "#2C2C2E"))
+                        .padding(5)
                 }
             }
-                .onAppear {
-                UITableView.appearance().backgroundColor = UIColor(Color("background"))
-            }
         }
+            .onAppear {
+            UITableView.appearance().backgroundColor = UIColor(Color("background"))
+        }
+
     }
 }
 
