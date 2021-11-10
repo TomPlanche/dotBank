@@ -74,6 +74,7 @@ struct HomeView: View {
                             content: "Add Deals Shop(s) and get cashback",
                             flags: 17
                         )
+                        
                     }
 
                 }

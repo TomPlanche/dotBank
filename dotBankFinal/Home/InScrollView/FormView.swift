@@ -19,6 +19,8 @@ struct FormView: View {
 
     @State var card: Int = 0
 
+    
+
     var body: some View {
 
         VStack {
@@ -92,6 +94,8 @@ struct FormView: View {
                         .listRowBackground(Color.hexToColor(hex: "#2C2C2E"))
                         .padding(5)
                 }
+
+
             }
         }
             .onAppear {

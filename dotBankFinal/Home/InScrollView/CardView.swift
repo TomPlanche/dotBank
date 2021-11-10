@@ -25,6 +25,12 @@ struct CardView: View {
         ["Next Closing Date", "Mar 13, 2021"]
     ]
 
+    let texte: [String] = [
+        "Lock Card",
+        "Replace Credit Card",
+        "Change PIN"
+    ]
+
     // Exemples of transaction
     let transactions: [Transaction] = [
         Transaction(
@@ -83,7 +89,7 @@ struct CardView: View {
                         })
                 }.padding()
 
-                Text("\(card.name) ...\(String(card.number).substring(from: -4))")
+                Text("\(card.name) ... \(String(card.number).substring(from: -4))")
                     .font(.system(size: 25, weight: .bold, design: .rounded))
                     .foregroundColor(.white)
 
@@ -101,7 +107,7 @@ struct CardView: View {
                         .foregroundColor(Color("blueText"))
                 }
 
-                // MARK: ProgressBar
+                    // MARK: ProgressBar
                 ProgressBar(
                     value: Float((card.money / Double(card.threshold))),
                     color: (Int(card.money) < card.threshold) ? Color(UIColor.systemBlue) : Color(UIColor.systemRed)
@@ -112,9 +118,9 @@ struct CardView: View {
                 Text("Avaliable Credit: \("".cleanDollars(Double(card.threshold) - card.money)) ")
                     .foregroundColor(Color("grayText"))
 
-                // MARK: Form For Payment
+                    // MARK: Form For Payment
                 Form {
-                    // MARK: Section For Payment
+                        // MARK: Section For Payment
                     Section(content: {
                         ForEach(0...textes.count - 1, id: \.self) { i in
                             HStack {
@@ -124,8 +130,8 @@ struct CardView: View {
                                 Text(textes[i][1])
                                     .bold()
                             }
-                                .font(.system(size: 18))
-                                .foregroundColor(.white)
+                            .font(.system(size: 18))
+                            .foregroundColor(.white)
                         }
                         HStack {
                             Text("Make Payment")
@@ -135,14 +141,14 @@ struct CardView: View {
                             Image(systemName: "chevron.right")
                                 .foregroundColor(Color(UIColor.systemGray))
                         }
-                            .font(.system(size: 20))
+                        .font(.system(size: 20))
                     }, header: {
-                            Text("PAYMENT INFO")
-                                .foregroundColor(Color("grayText"))
-                                .font(.system(size: 18))
-                        })
+                        Text("PAYMENT INFO")
+                            .foregroundColor(Color("grayText"))
+                            .font(.system(size: 18))
+                    })
                         .listRowBackground(Color.hexToColor(hex: "#2C2C2E"))
-                    // MARK: Section For Payment
+                        // MARK: Section For Payment
                     Section(content: {
                         ForEach(0...3, id: \.self) { i in
                             HStack {
@@ -156,7 +162,7 @@ struct CardView: View {
                                 Text("".cleanDollars(transactions[i].amount))
 
                             }
-                                .foregroundColor(.white)
+                            .foregroundColor(.white)
                         }
                         HStack {
                             Text("All Transactions")
@@ -166,13 +172,66 @@ struct CardView: View {
                             Image(systemName: "chevron.right")
                                 .foregroundColor(Color(UIColor.systemGray))
                         }
-                            .font(.system(size: 20))
+                        .font(.system(size: 20))
                     }, header: {
-
-                        })
+                        Text("RECENT TRANSACTIONS")
+                            .foregroundColor(Color("grayText"))
+                            .font(.system(size: 18))
+                    })
                         .listRowBackground(Color.hexToColor(hex: "#2C2C2E"))
+
+                    Section(
+                        content: {
+                            VStack(alignment: .leading) {
+                                Text("".cleanDollars(46.73))
+                                    .bold()
+                                    .font(.system(size: 19))
+                                Text("Totatal Available Rewards")
+                                    .font(.system(size: 15))
+                                    .foregroundColor(Color("grayText"))
+                            }.foregroundColor(.white)
+                            HStack {
+                                Text("Make Payment")
+                                    .bold()
+                                    .foregroundColor(Color("blueText"))
+                                Spacer()
+                                Image(systemName: "chevron.right")
+                                    .foregroundColor(Color("grayText"))
+                            }
+
+                        },
+                        header: {
+                            Text("CASH REWARD & BENEFICES")
+                                .foregroundColor(Color("grayText"))
+                        }
+                    )
+                        .listRowBackground(Color.hexToColor(hex: "#2C2C2E"))
+
+                    Section(
+                        content: {
+                            ForEach(0...2, id: \.self) { i in
+                                HStack {
+                                    Text(texte[i])
+                                        .foregroundColor(.white)
+                                    Spacer()
+                                    Image(systemName: "chevron.right")
+                                        .foregroundColor(Color("grayText"))
+                                }
+                            }
+
+                        },
+                        header: {
+                            Text("CARD MANAGEMENT")
+                                .foregroundColor(Color("grayText"))
+                        }
+                    ).listRowBackground(Color.hexToColor(hex: "#2C2C2E"))
+
+                    Section {
+                        Text("FICO Score")
+                            .foregroundColor(.white)
+                    }.listRowBackground(Color.hexToColor(hex: "#2C2C2E"))
                 }
-                    .onAppear {
+                .onAppear {
                     UITableView.appearance().backgroundColor = UIColor(Color("background"))
                 }
                 Spacer()
