@@ -10,17 +10,22 @@ import SwiftUI
 struct CardView: View {
 
     // MARK: - VARIABLES
+    // Card passed while calling the view
     @State var card: Card
 
+    // Binding passed while calling the view
+    // served to show the sheet
     @Binding var showSheetView: Bool
 
+
+    // Exemples of payment info
     let textes: [[String]] = [
         ["Payment Due Date", "Mar 10, 2021"],
         ["Minimum Payment Due", "$35.00"],
         ["Next Closing Date", "Mar 13, 2021"]
     ]
 
-
+    // Exemples of transaction
     let transactions: [Transaction] = [
         Transaction(
             number: 233,
@@ -48,6 +53,7 @@ struct CardView: View {
         )
     ]
 
+    // Fonction convertissant un Date en String
     func date2string(date: Date) -> String {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "dd/MM/YY"
@@ -66,6 +72,7 @@ struct CardView: View {
             VStack {
                 HStack {
                     Spacer()
+                    // Button that triggers the CardView
                     Button(action: {
                         self.showSheetView = false
                     }, label: {
