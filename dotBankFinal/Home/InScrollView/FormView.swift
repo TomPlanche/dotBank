@@ -17,6 +17,8 @@ struct FormView: View {
 
     @State var showSheetView = false
 
+    @State var card: Int = 0
+
     var body: some View {
 
         VStack {
@@ -61,6 +63,7 @@ struct FormView: View {
                         Button(
                             action: {
                                 self.showSheetView.toggle()
+                                self.card = i
                             },
                             label: {
                                 HStack {
@@ -80,11 +83,11 @@ struct FormView: View {
                                     Spacer()
                                     Image(systemName: "chevron.right")
                                         .foregroundColor(Color("grayText"))
-                                }.sheet(isPresented: $showSheetView) {
-                                    CardView(card: Cards[i], showSheetView: self.$showSheetView)
                                 }
                             }
                         )
+                    }.sheet(isPresented: $showSheetView) {
+                        CardView(card: Cards[card], showSheetView: self.$showSheetView)
                     }
                         .listRowBackground(Color.hexToColor(hex: "#2C2C2E"))
                         .padding(5)
