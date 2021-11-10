@@ -112,8 +112,9 @@ struct CardView: View {
                 Text("Avaliable Credit: \("".cleanDollars(Double(card.threshold) - card.money)) ")
                     .foregroundColor(Color("grayText"))
 
-                // MARK: Form
+                // MARK: Form For Payment
                 Form {
+                    // MARK: Section For Payment
                     Section(content: {
                         ForEach(0...textes.count - 1, id: \.self) { i in
                             HStack {
@@ -141,6 +142,7 @@ struct CardView: View {
                                 .font(.system(size: 18))
                         })
                         .listRowBackground(Color.hexToColor(hex: "#2C2C2E"))
+                    // MARK: Section For Payment
                     Section(content: {
                         ForEach(0...3, id: \.self) { i in
                             HStack {
@@ -173,7 +175,6 @@ struct CardView: View {
                     .onAppear {
                     UITableView.appearance().backgroundColor = UIColor(Color("background"))
                 }
-
                 Spacer()
             }
         }
