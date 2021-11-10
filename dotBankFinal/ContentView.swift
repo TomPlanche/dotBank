@@ -8,6 +8,9 @@
 import SwiftUI
 
 struct ContentView: View {
+    init() {
+        UITabBar.appearance().unselectedItemTintColor = UIColor(Color.white.opacity(0.5))
+    }
     var body: some View {
         TabView {
             HomeView()

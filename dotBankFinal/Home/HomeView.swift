@@ -40,6 +40,7 @@ struct HomeView: View {
                     HStack {
                         Text("Accounts")
                             .font(.system(size: 40, weight: .semibold, design: .rounded))
+                            .foregroundColor(.white)
                         Spacer()
                     }.padding(.leading)
 

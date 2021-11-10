@@ -15,21 +15,6 @@ struct FormView: View {
 
     @State var areYouGoingToSecondView: Bool = false
 
-    /*
-     .navigationBarTitle("SwiftUI Tutorials")
-     .navigationBarItems(trailing:
-     Button(action: {
-     self.showSheetView.toggle()
-     }) {
-     Image(systemName: "bell.circle.fill")
-     .font(Font.system(.title))
-     }
-     )
-     }.sheet(isPresented: $showSheetView) {
-     SheetView(showSheetView: self.$showSheetView)
-     }
-     */
-
     @State var showSheetView = false
 
     var body: some View {
@@ -72,24 +57,34 @@ struct FormView: View {
                         Text("CREDIT CARDS (\(Cards.count))")
                         .foregroundColor(Color("grayText"))
                 ) {
-                    ForEach(Cards) { card in
-                        Button(action: {
-                            self.showSheetView.toggle()
-                        }, label: {
+                    ForEach(0...Cards.count - 1, id: \.self) { i in
+                        Button(
+                            action: {
+                                self.showSheetView.toggle()
+                            },
+                            label: {
                                 HStack {
                                     VStack(alignment: .leading) {
-                                        Text("".cleanDollars(card.money))
-                                            .bold()
-                                            .font(.system(size: 19))
-                                        Text("\(card.name) ...\(String(card.number).substring(from: -4))")
-                                            .font(.system(size: 15))
-                                            .foregroundColor(Color("grayText"))
+                                        HStack {
+                                            Text("".cleanDollars(Cards[i].money))
+                                                .bold()
+                                                .font(.system(size: 19))
+                                        }
+                                        HStack {
+                                            Text("\(Cards[i].name) ...\(String(Cards[i].number).substring(from: -4))")
+                                                .font(.system(size: 15))
+                                                .foregroundColor(Color("grayText"))
+                                        }
                                     }
+                                        .foregroundColor(.white)
+                                    Spacer()
+                                    Image(systemName: "chevron.right")
+                                        .foregroundColor(Color("grayText"))
                                 }.sheet(isPresented: $showSheetView) {
-                                    CardView(card: card, showSheetView: self.$showSheetView)
+                                    CardView(card: Cards[i], showSheetView: self.$showSheetView)
                                 }
-                            })
-
+                            }
+                        )
                     }
                         .listRowBackground(Color.hexToColor(hex: "#2C2C2E"))
                         .padding(5)

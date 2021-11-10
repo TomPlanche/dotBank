@@ -65,16 +65,21 @@ struct CardView: View {
             // MARK: General VStack
             VStack {
                 HStack {
-                    Text("\(card.name) ...\(String(card.number).substring(from: -4))")
                     Spacer()
                     Button(action: {
                         self.showSheetView = false
                     }, label: {
-                            Image(systemName: "bell")
+                            Text("Done")
+                                .bold()
+                                .font(.system(size: 20, weight: .semibold, design: .rounded))
+                                .foregroundColor(Color("blueText"))
                         })
-                }
-                    .font(.system(size: 20, weight: .semibold, design: .rounded))
-                    .foregroundColor(Color("blueText"))
+                }.padding()
+
+                Text("\(card.name) ...\(String(card.number).substring(from: -4))")
+                    .font(.system(size: 25, weight: .bold, design: .rounded))
+                    .foregroundColor(.white)
+
 
                 Text("".cleanDollars(card.money))
                     .font(.system(size: 45, weight: .semibold, design: .rounded))
@@ -167,14 +172,14 @@ struct CardView: View {
         }
     }
 }
-//
-//struct CardView_Previews: PreviewProvider {
-//
-//    static let card1 = Card(number: 4724332197467784, name: "Platinum Mastercard", money: 4241.65)
-//
-//    static var showSheetView: Bool = false
-//
-//    static var previews: some View {
-//        CardView(card: card1, $showSheetView)
-//    }
-//}
+
+struct CardView_Previews: PreviewProvider {
+
+    static let card1 = Card(number: 4724332197467784, name: "Platinum Mastercard", money: 4241.65)
+
+    @State static var showSheetView: Bool = false
+
+    static var previews: some View {
+        CardView(card: card1, showSheetView: $showSheetView)
+    }
+}
