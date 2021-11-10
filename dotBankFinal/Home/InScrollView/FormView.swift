@@ -15,7 +15,12 @@ struct FormView: View {
 
     @State var areYouGoingToSecondView: Bool = false
 
+    @State var showSheetView = false
+
+    @State var card: Int = 0
+
     var body: some View {
+
         VStack {
             // MARK: - Form
             Form {
@@ -49,35 +54,50 @@ struct FormView: View {
                         .padding(5)
                 }
                 // MARK: - Section Cards
-
                 Section(
                     header:
                         Text("CREDIT CARDS (\(Cards.count))")
                         .foregroundColor(Color("grayText"))
                 ) {
-                    ForEach(Cards) { card in
-                        NavigationLink(destination: CardView(card: card)) {
-                            HStack {
-                                VStack(alignment: .leading) {
-                                    Text("".cleanDollars(card.money))
-                                        .bold()
-                                        .font(.system(size: 19))
-                                    Text("\(card.name) ...\(String(card.number).substring(from: -4))")
-                                        .font(.system(size: 15))
+                    ForEach(0...Cards.count - 1, id: \.self) { i in
+                        Button(
+                            action: {
+                                self.showSheetView.toggle()
+                                self.card = i
+                            },
+                            label: {
+                                HStack {
+                                    VStack(alignment: .leading) {
+                                        HStack {
+                                            Text("".cleanDollars(Cards[i].money))
+                                                .bold()
+                                                .font(.system(size: 19))
+                                        }
+                                        HStack {
+                                            Text("\(Cards[i].name) ...\(String(Cards[i].number).substring(from: -4))")
+                                                .font(.system(size: 15))
+                                                .foregroundColor(Color("grayText"))
+                                        }
+                                    }
+                                        .foregroundColor(.white)
+                                    Spacer()
+                                    Image(systemName: "chevron.right")
                                         .foregroundColor(Color("grayText"))
                                 }
                             }
-                        }
-
+                        )
+                    }.sheet(isPresented: $showSheetView) {
+                        CardView(card: Cards[card], showSheetView: self.$showSheetView)
                     }
                         .listRowBackground(Color.hexToColor(hex: "#2C2C2E"))
                         .padding(5)
                 }
             }
         }
-        .onAppear {
+            .onAppear {
             UITableView.appearance().backgroundColor = UIColor(Color("background"))
         }
+
     }
 }
 

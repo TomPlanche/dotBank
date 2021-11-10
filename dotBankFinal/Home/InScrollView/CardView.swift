@@ -12,6 +12,8 @@ struct CardView: View {
     // MARK: - VARIABLES
     @State var card: Card
 
+    @Binding var showSheetView: Bool
+
     let textes: [[String]] = [
         ["Payment Due Date", "Mar 10, 2021"],
         ["Minimum Payment Due", "$35.00"],
@@ -63,12 +65,21 @@ struct CardView: View {
             // MARK: General VStack
             VStack {
                 HStack {
-                    Text("\(card.name) ...\(String(card.number).substring(from: -4))")
                     Spacer()
-                    Image(systemName: "bell")
-                }
-                    .font(.system(size: 20, weight: .semibold, design: .rounded))
-                    .foregroundColor(Color("blueText"))
+                    Button(action: {
+                        self.showSheetView = false
+                    }, label: {
+                            Text("Done")
+                                .bold()
+                                .font(.system(size: 20, weight: .semibold, design: .rounded))
+                                .foregroundColor(Color("blueText"))
+                        })
+                }.padding()
+
+                Text("\(card.name) ...\(String(card.number).substring(from: -4))")
+                    .font(.system(size: 25, weight: .bold, design: .rounded))
+                    .foregroundColor(.white)
+
 
                 Text("".cleanDollars(card.money))
                     .font(.system(size: 45, weight: .semibold, design: .rounded))
@@ -146,7 +157,7 @@ struct CardView: View {
                             Image(systemName: "chevron.right")
                                 .foregroundColor(Color(UIColor.systemGray))
                         }
-                        .font(.system(size: 20))
+                            .font(.system(size: 20))
                     }, header: {
 
                         })
@@ -166,7 +177,9 @@ struct CardView_Previews: PreviewProvider {
 
     static let card1 = Card(number: 4724332197467784, name: "Platinum Mastercard", money: 4241.65)
 
+    @State static var showSheetView: Bool = false
+
     static var previews: some View {
-        CardView(card: card1)
+        CardView(card: card1, showSheetView: $showSheetView)
     }
 }
